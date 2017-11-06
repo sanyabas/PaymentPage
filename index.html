@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <title>Оплата</title>
+        <script>
+            $(function () {
+                $('#payment').tabs();
+                $('#sendPayment').tabs();
+            });
+        </script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <section class="sellerInfo">
+                    <h1 class="sellerName">ООО "VoidHack"</h1>
+                    <div class="sellerContacts">
+                        <span class="sellerContact" id="sellerPhone">+71234567890</span>
+                        <span class="sellerContact" id="sellerSite">
+                            <a href="https://ctftime.org/team/21137" target="_blank">Вебсайт</a>
+                        </span>
+                        <span class="sellerContact" id="sellerMail">
+                            <a href="mailto:voidhack.ctf@gmail.com"
+                               target="_blank">voidhack.ctf@gmail.com</a>
+                        </span>
+                    </div>
+                    <p class="companyInfo"><a href="#">Информация о компании</a></p>
+                    <p class="reqs"><a href="#">Показать реквизиты</a></p>
+                </section>
+                <section class="sellerLogo">
+                    <img src="images/logo.jpg" alt="seller logo" id="sellerImg">
+                </section>
+            </header>
+            <hr>
+            <main>
+                <div id="payment">
+                    <ul class="tabs" id="paymentDirection">
+                        <li><a href="#sendPayment">Заплатить</a></li>
+                        <li><a href="#requestPayment">Запросить платёж</a></li>
+                    </ul>
+                    <section class="payment" id="sendPayment">
+                        <ul class="tabs" id="paymentSource">
+                            <li><a href="#anyBank"><span class="fa fa-credit-card"></span> С карты любого
+                                банка</a></li>
+                            <li><a href="#internetBank"><span class="fa fa-desktop"></span> Из своего
+                                интернет-банка</a></li>
+                        </ul>
+                        <section id="anyBank">
+                            <form>
+                                <div class="anyBank colLeft">
+                                    <div class="cardImg">
+                                        <div class="cardLogos">
+                                            <img class="cardLogo" src="images/visa.png" alt="visa logo">
+                                            <img class="cardLogo" src="images/maestro.png"
+                                                 alt="maestro logo">
+                                            <img class="cardLogo" src="images/Mastercard-logo.svg"
+                                                 alt="mastercard logo">
+                                        </div>
+                                        <input class="cardInput" type="tel" placeholder="Номер карты"
+                                               id="cardNumber" minlength="16" maxlength="16" pattern="\d{16}"
+                                               required>
+                                        <input class="cardInput" type="text" placeholder="ММ/ГГ" id="valid"
+                                               minlength="5" maxlength="5" pattern="[01][1-9]/[1-3][0-9]"
+                                               required>
+                                        <input class="cardInput" type="tel" placeholder="CVC" id="cvc"
+                                               minlength="3" maxlength="3" pattern="\d{3}" required></div>
+                                </div>
+                                <div class="anyBank colRight">
+                                    <div class="formRow">
+                                        <label class="infoLabel" for="cardSum">Сумма</label>
+                                        <input type="number" class="infoInput" id="cardSum"
+                                               placeholder="От 1000 до 75000" min="1000" max="75000"
+                                               required>
+                                    </div>
+                                    <div class="formRow">
+                                        <label class="infoLabel" for="cardComment">Комментарий</label>
+                                        <input class="infoInput" type="text" id="cardComment"
+                                               maxlength="150">
+                                    </div>
+                                    <div class="formRow">
+                                        <label class="infoLabel" for="cardEmail">Ваша эл.почта</label>
+                                        <input class="infoInput" type="email" id="cardEmail" required>
+                                    </div>
+                                    <input type="submit" value="Заплатить" class="formButton" disabled>
+                                </div>
+                            </form>
+                        </section>
+                        <section id="internetBank">
+                            Сформируйте платёжку и загрузите её в свой банк для подписи
+                            <form>
+                                <div class="formRow">
+                                    <label class="inBankLabel" for="inBankFrom">От кого</label>
+                                    <input type="text" placeholder="ИНН или название плательщика"
+                                           id="inBankFrom" class="bankInput" minlength="10" maxlength="12"
+                                           pattern="\d{10,12}" required>
+                                </div>
+                                <div class="formRow">
+                                    <label class="inBankLabel" for="bankBik">БИК</label>
+                                    <input type="text" id="bankBik" class="bankInput" minlength="9"
+                                           maxlength="9" pattern="\d{9}" required>
+                                </div>
+                                <div class="formRow">
+                                    <label class="inBankLabel" for="bankAccount">Номер счёта</label>
+                                    <input type="text" id="bankAccount" class="bankInput" pattern="\d{20}"
+                                           maxlength="20" required>
+                                </div>
+                                <div class="formRow">
+                                    <label class="inBankLabel" for="bankGoal">За что</label>
+                                    <input type="text" placeholder="Назначение платежа" id="bankGoal"
+                                           class="bankInput" pattern=".*((НДС 18%)|(НДС 10%)|(без НДС)).*"
+                                           required>
+                                </div>
+                                <div class="formRow">
+                                    <label class="inBankLabel" for="bankSum">Сколько</label>
+                                    <input type="number" placeholder="От 1000 до 75000" id="bankSum"
+                                           class="bankInput" min="1000" max="75000" required>
+                                </div>
+                                <div class="formRow">
+                                    <input class="formButton" type="submit"
+                                           value="Получить файл для интернет-банка" disabled>
+                                </div>
+                                <div class="formRow">
+                                    <input class="formButton" type="reset" value="Очистить форму">
+                                </div>
+                            </form>
+                        </section>
+                    </section>
+                    <section class="payment" id="requestPayment">
+                        Создайте платёжку, а ООО "VoidHack" подпишет её у себя в интернет-банке
+                        <form>
+                            <div class="formRow">
+                                <label class="reqLabel" for="reqTo">ИНН получателя</label>
+                                <input type="text" placeholder="ИНН или название получателя"
+                                       class="reqPaymentInput" id="reqTo" minlength="10" maxlength="12"
+                                       pattern="\d{10,12}" required>
+                            </div>
+                            <div class="formRow">
+                                <label class="reqLabel" for="reqBik">БИК</label>
+                                <input type="text" class="reqPaymentInput" id="reqBik" minlength="9"
+                                       maxlength="9" pattern="\d{9}" required>
+                            </div>
+                            <div class="formRow">
+                                <label class="reqLabel" for="reqAccount">Номер счёта</label>
+                                <input type="text" class="reqPaymentInput" id="reqAccount" pattern="\d{20}"
+                                       maxlength="20" required>
+                            </div>
+                            <div class="formRow">
+                                <label class="reqLabel" for="reqGoal">За что</label>
+                                <input type="text" placeholder="Назначение платежа" class="reqPaymentInput"
+                                       id="reqGoal" pattern=".*((НДС 18%)|(НДС 10%)|(без НДС)).*" required>
+                            </div>
+                            <div class="formRow">
+                                <label class="reqLabel" for="reqSum">Сколько</label>
+                                <input type="number" placeholder="От 1000 до 75000" class="reqPaymentInput"
+                                       id="reqSum" min="1000" max="75000" required>
+                            </div>
+                            <div class="formRow">
+                                <label class="reqLabel" for="reqPhone">Номер телефона</label>
+                                <input type="tel" value="+7" class="reqPaymentInput" id="reqPhone"
+                                       maxlength="12" pattern="\+79\d{9}">
+                            </div>
+                            <div class="formRow">
+                                <label class="reqLabel" for="reqMail">Эл.почта</label>
+                                <input type="email" placeholder="Для уведомлений об оплате"
+                                       class="reqPaymentInput" id="reqMail" required>
+                            </div>
+                            <div class="formRow">
+                                <input class="formButton" type="submit" value="Создать платёж" disabled>
+                            </div>
+                            <div class="formRow">
+                                <input class="formButton" type="reset" value="Очистить форму">
+                            </div>
+                        </form>
+                    </section>
+                </div>
+                <hr>
+                <h2>О компании ООО "VoidHack"</h2>
+                <section class="sellerGoods">
+                    <figure class="sellerGood"><img src="images/ructf.jpg" alt="RuCTF" class="goodImg">
+                        <figcaption class="goodCaption">Сыграть на RuCTF</figcaption>
+                        <p class="goodPrice">0 &#8381;</p></figure>
+                    <figure class="sellerGood"><img src="images/pentagon.jpg" alt="Pentagon" class="goodImg">
+                        <figcaption class="goodCaption">Взломать пентагон</figcaption>
+                        <p class="goodPrice">&infin; &#8381;</p></figure>
+                    <figure class="sellerGood"><img src="images/pentest.jpg" alt="Pentest" class="goodImg">
+                        <figcaption class="goodCaption">Пентест</figcaption>
+                        <p class="goodPrice">5000 &#8381;</p></figure>
+                </section>
+            </main>
+            <footer>
+                <section class="socialButtons">
+                    <a href="https://facebook.com/sharer.php?url=http://79.172.60.237:3415" target="_blank"
+                       class="shareButton facebook"><span class="fa fa-facebook"></span> Поделиться</a>
+                    <a href="https://twitter.com/intent/tweet?url=http://79.172.60.237:3415" target="_blank"
+                       class="shareButton twitter"><span class="fa fa-twitter"></span> Твитнуть</a>
+                    <a href="https://plus.google.com/share?url=http://79.172.60.237:3415" target="_blank"
+                       class="shareButton google"><span class="fa fa-google"></span> Поделиться</a>
+                    <a href="http://vk.com/share.php?url=http://79.172.60.237:3415" target="_blank"
+                       class="shareButton vk"><span class="fa fa-vk"></span> Поделиться</a>
+                </section>
+            </footer>
+        </div>
+    </body>
+</html>
